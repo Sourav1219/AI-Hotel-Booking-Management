@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us - AI Hotel Booking Assistant</title>
+  <script>
+    if (!window.API_BASE_URL) {
+      window.API_BASE_URL = window.location.port === '5173' ? 'http://127.0.0.1:8000' : '';
+    }
+    if (!window.ASSET_BASE_URL) {
+      window.ASSET_BASE_URL = window.location.port === '5173' ? '/images' : '/public/images';
+    }
+    document.documentElement.style.setProperty('--asset-base', window.ASSET_BASE_URL);
+    document.documentElement.style.setProperty('--hero-bg', `url(${window.ASSET_BASE_URL}/hotel-bg.jpg)`);
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/styles.css">
+  <style>
+    .contact-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .contact-form {
+      background-color: var(--white);
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+    }
+
+    .form-title {
+      margin-bottom: 1.5rem;
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    .form-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 3px;
+      background-color: var(--primary-color);
+    }
+
+    .contact-info {
+      background-color: var(--primary-color);
+      color: var(--white);
+      border-radius: 10px;
+      padding: 2rem;
+    }
+
+    .contact-info h3 {
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    .contact-info h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 3px;
+      background-color: var(--white);
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-item i {
+      margin-right: 1rem;
+      font-size: 1.2rem;
+      width: 20px;
+    }
+
+    .faq-section {
+      margin-bottom: 3rem;
+    }
+
+    .faq-title {
+      margin-bottom: 2rem;
+      text-align: center;
+      color: var(--primary-color);
+    }
+
+    .faq-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .faq-item {
+      background-color: var(--white);
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      padding: 1rem 1.5rem;
+      background-color: var(--secondary-color);
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-question i {
+      transition: transform 0.3s ease;
+    }
+
+    .faq-answer {
+      padding: 1.5rem;
+      display: none;
+      line-height: 1.6;
+    }
+
+    .faq-item.active .faq-question {
+      background-color: var(--primary-light);
+      color: var(--white);
+    }
+
+    .faq-item.active .faq-question i {
+      transform: rotate(180deg);
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .contact-section,
+      .faq-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-hotel"></i> AI Hotel Booking
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="explore.html">Explore</a></li>
+        <li><a href="bookings.html">My Bookings</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <div class="main-container">
+      <!-- Hero Section -->
+      <section class="hero">
+        <h1>Contact Us</h1>
+        <p>Have questions or need assistance? We're here to help you with all your travel needs.</p>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="contact-section">
+        <div class="contact-form">
+          <h3 class="form-title">Send Us a Message</h3>
+          <form id="contact-form">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" placeholder="Your email" required>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" placeholder="Subject" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" rows="6" placeholder="Your message" required></textarea>
+            </div>
+            <button type="submit" class="btn">Send Message</button>
+          </form>
+        </div>
+        <div class="contact-info">
+          <h3>Contact Information</h3>
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <p>1234 Hotel Plaza, Downtown<br>New York, NY 10001<br>United States</p>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <p>+1 (555) 123-4567</p>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <p>support@aihotelbooking.com</p>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-clock"></i>
+            <p>Monday - Friday: 9:00 AM - 8:00 PM<br>Saturday - Sunday: 10:00 AM - 6:00 PM</p>
+          </div>
+          <div class="social-icons" style="margin-top: 2rem;">
+            <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-question">
+              How does the AI booking assistant work? <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              Our AI booking assistant analyzes your preferences, travel history, and search patterns to provide personalized hotel recommendations. It learns from your interactions to improve suggestions over time, helping you find accommodations that perfectly match your needs and budget.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              Can I cancel my reservation? <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              Yes, most reservations can be cancelled up to 24-48 hours before check-in, depending on the hotel's policy. You can manage your bookings in the "My Bookings" section of your account. Some special rates may have different cancellation policies, which will be clearly indicated during booking.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              Is my payment information secure? <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              Absolutely. We use industry-standard encryption and security protocols to protect your personal and payment information. We comply with PCI DSS (Payment Card Industry Data Security Standard) requirements and never store your full credit card details on our servers.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              How can I get the best deals on hotels? <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              Our AI assistant constantly monitors prices and promotions to find the best deals. Booking in advance, traveling in off-peak seasons, and being flexible with your dates often results in better prices. You can also enable price alerts for specific destinations to be notified of special offers.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              What if I need to modify my reservation? <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              You can modify most reservations through the "My Bookings" section. Changes to dates, number of guests, or room type are usually possible, subject to availability and potential price adjustments. Some changes may be subject to the hotel's modification policy.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              Can I book multiple rooms at once? <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              Yes, you can book multiple rooms in a single reservation. During the booking process, you'll have the option to select the number of rooms needed. You can specify different room types and guest information for each room if required.
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Chatbot -->
+  <div class="chatbot-container">
+    <div class="chatbot-icon" id="chatbot-toggle">
+      <i class="fas fa-comments"></i>
+    </div>
+    <div class="chatbot-window" id="chatbot-window">
+      <div class="chatbot-header">
+        <div class="chatbot-title">AI Travel Assistant</div>
+        <button class="close-chat" id="close-chat">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="chat-messages" id="chat-messages">
+        <div class="message bot-message">
+          Hello! I'm your AI travel assistant. How can I help you today?
+        </div>
+      </div>
+      <div class="chat-input-container">
+        <input type="text" class="chat-input" id="chat-input" placeholder="Type your message...">
+        <button class="send-btn" id="send-message">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-about">
+        <div class="footer-logo">AI Hotel Booking</div>
+        <p class="footer-description">
+          We use artificial intelligence to help you find the perfect hotel at the best price. Our AI assistant
+          personalizes recommendations based on your preferences and travel history.
+        </p>
+        <div class="social-icons">
+          <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="explore.html">Explore</a></li>
+          <li><a href="bookings.html">My Bookings</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Travel Guides</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      &copy; 2025 AI Hotel Booking Assistant. All rights reserved.
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.ts"></script>
+  <script type="module" src="/src/app.js"></script>
+  <script type="module" src="/src/contact.js"></script>
+  <script type="module" src="/src/router.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Bookings - AI Hotel Booking Assistant</title>
+  <script>
+    if (!window.API_BASE_URL) {
+      window.API_BASE_URL = window.location.port === '5173' ? 'http://127.0.0.1:8000' : '';
+    }
+    if (!window.ASSET_BASE_URL) {
+      window.ASSET_BASE_URL = window.location.port === '5173' ? '/images' : '/public/images';
+    }
+    document.documentElement.style.setProperty('--asset-base', window.ASSET_BASE_URL);
+    document.documentElement.style.setProperty('--hero-bg', `url(${window.ASSET_BASE_URL}/hotel-bg.jpg)`);
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/styles.css">
+  <style>
+    .booking-list {
+      margin-bottom: 3rem;
+    }
+
+    .booking-card {
+      background-color: var(--white);
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .booking-header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .booking-id {
+      font-weight: 600;
+    }
+
+    .booking-status {
+      background-color: var(--white);
+      color: var(--primary-color);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .booking-status.confirmed {
+      background-color: #e1f7e1;
+      color: #28a745;
+    }
+
+    .booking-details {
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+    }
+
+    .booking-info h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    .booking-info p {
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .booking-info i {
+      width: 25px;
+      color: var(--primary-color);
+      margin-right: 0.5rem;
+    }
+
+    .booking-actions {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--primary-color);
+      border: 1px solid var(--primary-color);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--primary-light);
+      color: var(--white);
+    }
+
+    .no-bookings {
+      background-color: var(--light-gray);
+      padding: 3rem;
+      text-align: center;
+      border-radius: 10px;
+    }
+
+    .no-bookings h3 {
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+
+    .no-bookings p {
+      margin-bottom: 1.5rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @media (max-width: 768px) {
+      .booking-details {
+        grid-template-columns: 1fr;
+      }
+
+      .booking-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-hotel"></i> AI Hotel Booking
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="explore.html">Explore</a></li>
+        <li><a href="bookings.html">My Bookings</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <div class="main-container">
+      <!-- Hero Section -->
+      <section class="hero">
+        <h1>My Bookings</h1>
+        <p>Manage your upcoming and past hotel reservations in one place.</p>
+      </section>
+
+      <!-- Bookings List -->
+      <section class="booking-list" id="booking-list">
+        <!-- Sample booking - in a real app, this would be populated by JavaScript -->
+        <div class="booking-card">
+          <div class="booking-header">
+            <div class="booking-id">Booking #12345</div>
+            <div class="booking-status confirmed">Confirmed</div>
+          </div>
+          <div class="booking-details">
+            <div class="booking-info">
+              <h3>Luxury Suite Hotel</h3>
+              <p><i class="fas fa-map-marker-alt"></i> New York, USA</p>
+              <p><i class="fas fa-calendar-alt"></i> Check-in: June 15, 2025</p>
+              <p><i class="fas fa-calendar-check"></i> Check-out: June 20, 2025</p>
+              <p><i class="fas fa-user"></i> 2 Guests</p>
+              <p><i class="fas fa-bed"></i> Deluxe Suite</p>
+              <div class="booking-actions">
+                <button class="btn">Modify Booking</button>
+                <button class="btn btn-outline">Cancel Booking</button>
+              </div>
+            </div>
+            <div class="booking-image">
+              <img src="/images/hotel-room1.jpg" alt="Luxury Suite Hotel" class="hotel-img">
+            </div>
+          </div>
+        </div>
+
+        <div class="booking-card">
+          <div class="booking-header">
+            <div class="booking-id">Booking #12346</div>
+            <div class="booking-status">Pending</div>
+          </div>
+          <div class="booking-details">
+            <div class="booking-info">
+              <h3>Grand Resort & Spa</h3>
+              <p><i class="fas fa-map-marker-alt"></i> Miami, USA</p>
+              <p><i class="fas fa-calendar-alt"></i> Check-in: July 10, 2025</p>
+              <p><i class="fas fa-calendar-check"></i> Check-out: July 17, 2025</p>
+              <p><i class="fas fa-user"></i> 3 Guests</p>
+              <p><i class="fas fa-bed"></i> Ocean View Suite</p>
+              <div class="booking-actions">
+                <button class="btn">Modify Booking</button>
+                <button class="btn btn-outline">Cancel Booking</button>
+              </div>
+            </div>
+            <div class="booking-image">
+              <img src="/images/hotel-room2.jpg" alt="Grand Resort & Spa" class="hotel-img">
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty state (commented out for now) -->
+        <!--
+        <div class="no-bookings">
+          <h3>No Bookings Found</h3>
+          <p>You don't have any hotel bookings yet. Start planning your next trip by exploring our curated selection of premium hotels.</p>
+          <a href="explore.html" class="btn">Explore Hotels</a>
+        </div>
+        -->
+      </section>
+    </div>
+  </main>
+
+  <!-- Chatbot -->
+  <div class="chatbot-container">
+    <div class="chatbot-icon" id="chatbot-toggle">
+      <i class="fas fa-comments"></i>
+    </div>
+    <div class="chatbot-window" id="chatbot-window">
+      <div class="chatbot-header">
+        <div class="chatbot-title">AI Travel Assistant</div>
+        <button class="close-chat" id="close-chat">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="chat-messages" id="chat-messages">
+        <div class="message bot-message">
+          Hello! I'm your AI travel assistant. How can I help you with your bookings today?
+        </div>
+      </div>
+      <div class="chat-input-container">
+        <input type="text" class="chat-input" id="chat-input" placeholder="Type your message...">
+        <button class="send-btn" id="send-message">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-about">
+        <div class="footer-logo">AI Hotel Booking</div>
+        <p class="footer-description">
+          We use artificial intelligence to help you find the perfect hotel at the best price. Our AI assistant
+          personalizes recommendations based on your preferences and travel history.
+        </p>
+        <div class="social-icons">
+          <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="explore.html">Explore</a></li>
+          <li><a href="bookings.html">My Bookings</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Travel Guides</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      &copy; 2025 AI Hotel Booking Assistant. All rights reserved.
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.ts"></script>
+  <script type="module" src="/src/app.js"></script>
+  <script type="module" src="/src/bookings.js"></script>
+  <script type="module" src="/src/router.js"></script>
+</body>
+
+</html>
