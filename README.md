@@ -1,75 +1,134 @@
-# AI-Hotel-Booking-Management-
+# AI Hotel Booking Management
 
-An AI-powered hotel booking management system that enables smart hotel search, user authentication, and efficient booking with a modern web interface.
+An AI-powered hotel booking management system that enables intelligent hotel search, secure user authentication, and a seamless booking experience through a modern web interface.
 
-## Features
-- **AI-Powered Assistance:** Smart interface for answering booking queries and assisting users.
-- **Dynamic Bookings:** Explore hotels, view availability, and manage reservations seamlessly.
-- **Responsive Design:** A beautiful, fully responsive UI optimized for all devices.
-- **Robust Backend:** PHP backend paired with a MySQL database.
+---
 
-## Technologies Used
-- **Frontend:** HTML, CSS, JavaScript/TypeScript, Vite
-- **Backend:** PHP
-- **Database:** MySQL
-- **Linting & Formatting:** ESLint, Prettier, Biome
+## 🚀 Features
 
-## Getting Started
+* **AI-Powered Assistance**
+  Smart interface to assist users with booking queries and recommendations.
+
+* **Dynamic Booking System**
+  Browse hotels, check availability, and manage reservations efficiently.
+
+* **Responsive UI**
+  Fully responsive design optimized for desktop, tablet, and mobile devices.
+
+* **Robust Backend**
+  PHP-based backend integrated with a MySQL database for reliable data handling.
+
+---
+
+## 🛠 Tech Stack
+
+* **Frontend:** HTML, CSS, JavaScript (Vite)
+* **Backend:** PHP
+* **Database:** MySQL
+* **Tools:** ESLint, Prettier, Biome
+
+---
+
+## ⚙️ Getting Started
 
 ### Prerequisites
-- Node.js (v18 or higher recommended)
-- PHP (v8.0 or higher)
-- MySQL Server
+
+* Node.js (v18+ recommended)
+* PHP (v8.0+)
+* MySQL Server
+
+---
 
 ### Installation
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/Sourav1219/AI-Hotel-Booking-Management-.git
-   cd AI-Hotel-Booking-Management-
-   ```
+#### 1. Clone the repository
 
-2. **Install frontend dependencies:**
-   ```bash
-   npm install
-   ```
+```bash
+git clone https://github.com/Sourav1219/AI-Hotel-Booking-Management-.git
+cd AI-Hotel-Booking-Management-
+```
 
-3. **Database Setup:**
-   - Create a new MySQL database named `AI_Hotel_Booking` (or your preferred name).
-   - The application is designed to auto-initialize the database using `database.sql` if it connects successfully but finds missing tables. Alternatively, you can manually import `database.sql` into your database.
+#### 2. Install frontend dependencies
 
-4. **Environment Configuration:**
-   - Copy the provided `.env.example` file to a new file named `.env`:
-     ```bash
-     cp .env.example .env
-     ```
-   - Open `.env` and update the database credentials to match your local MySQL setup:
-     ```ini
-     DB_HOST="127.0.0.1"
-     DB_PORT="3306"
-     DB_NAME="AI_Hotel_Booking"
-     DB_USER="root"
-     DB_PASS="your_database_password"
-     ```
+```bash
+npm install
+```
 
-### Running the Application Locally
+---
 
-**1. Start the Vite Frontend Server:**
+### 🗄 Database Setup
+
+1. Create a MySQL database:
+
+```
+AI_Hotel_Booking
+```
+
+2. Import the `database.sql` file manually
+   *(or let the app auto-initialize if configured)*
+
+---
+
+### 🔐 Environment Configuration
+
+Create your environment file:
+
+```bash
+cp .env.example .env
+```
+
+Update `.env` with your database credentials:
+
+```env
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_NAME=AI_Hotel_Booking
+DB_USER=root
+DB_PASS=your_database_password
+```
+
+---
+
+## ▶️ Running the Project
+
+### Start Frontend
+
 ```bash
 npm run dev
 ```
-This will start the development server (usually at `http://localhost:5173`).
 
-**2. Start the PHP Backend (Optional for API endpoints):**
-If you are running the backend separately, open a new terminal in the project root and start PHP's built-in server:
+Frontend runs at: http://localhost:5173
+
+---
+
+### Start Backend (PHP server)
+
 ```bash
 php -S localhost:8000
 ```
-*(Note: You can also host the PHP files using standard local servers like XAMPP, MAMP, or Laravel Valet).*
 
-## Build for Production
-To build the frontend assets for production deployment:
+*(Alternatively, use XAMPP, MAMP, or any local PHP server)*
+
+---
+
+## 📦 Build for Production
+
 ```bash
 npm run build
 ```
-This will generate optimized, minified static files in the `dist` directory.
+
+Production files will be generated in the `dist/` directory.
+
+---
+
+## 📌 Notes
+
+* Ensure MySQL server is running before starting the backend
+* `.env` file is not included in the repository for security reasons
+* Use `.env.example` as a template
+
+---
+
+## 📄 License
+
+© 2026 Sourav Verma. All rights reserved.
